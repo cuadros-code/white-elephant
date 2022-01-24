@@ -1,3 +1,7 @@
+:root{
+  --color-primary: #005cd4;
+}
+
 @font-face{
   font-family:'dongle';
   src: url("/assets/Dongle-Regular.ttf");

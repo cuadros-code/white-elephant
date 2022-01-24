@@ -15,10 +15,13 @@ const NavBar = () => {
         <nav className={styles.nav}>
           <div>
             <Image 
+              // src={"/3d.png"}
               src={"/elephant-logo.png"}
               alt="logo"
-              width={35}
-              height={35}
+              width={40}
+              height={40}
+              objectFit="contain"
+              quality={100}
             />
           </div>
 
@@ -53,7 +56,7 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <Link href={"/"}>
+              <Link href={"/login"}>
                 <a>Iniciar sesión</a>
               </Link>
             </li>
