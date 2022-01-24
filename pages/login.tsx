@@ -1,4 +1,5 @@
-import { TextField } from 'src/components';
+import Link from 'next/link';
+import { IconButton, PrimaryButton, TextField } from 'src/components';
 import styles from '../styles/Login.module.css'
 
 const Login = () => {
@@ -23,7 +24,16 @@ const Login = () => {
               label="Contraseña" 
               placeholder='Ingresa tu contraseña'
             />
+            <PrimaryButton>Iniciar sesión</PrimaryButton>
+            <Link href="/register">
+              <a className={styles.link} >Recuperar contraseña</a>
+            </Link>
           </form>
+
+          <p className={styles.divider}><span>Iniciar sesión con</span></p>
+          <div className={styles.socialMedia}>
+            <IconButton icon="Google" />
+          </div>
         </div>
       </div>
     </>

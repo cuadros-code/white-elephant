@@ -11,10 +11,14 @@
 }
 
 .form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   background-color: white;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.225);
   border-radius: 10px;
-  height: 80%;
+  height: 90%;
   max-width: 600px;
   margin: 0 70px;
   padding: 40px 60px;
@@ -39,4 +43,43 @@
   font-size: 5rem;
   line-height: 80px;
   margin-top: 0;
+}
+
+.actions{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.link{
+  font-size: 1.5rem;
+  text-decoration: underline;
+  color: var(--color-primary);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.socialMedia{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.divider {
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid #9c9c9c; 
+  line-height: 0.1em;
+  margin: 20px 0 35px; 
+} 
+
+.divider span { 
+  background:#fff; 
+  padding:0 10px; 
+  font-size: 1.3rem;
+  position: relative;
+  color: #9c9c9c;
+  top: 0.1em;
 }
