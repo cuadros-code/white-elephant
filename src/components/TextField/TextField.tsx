@@ -1,6 +1,7 @@
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import styles from './TextField.module.css';
 
-interface TextFieldProps extends React.HTMLAttributes<HTMLInputElement> {
+interface TextFieldProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>{
   label: string;
 }
 

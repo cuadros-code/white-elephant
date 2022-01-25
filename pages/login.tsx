@@ -17,22 +17,23 @@ const Login = () => {
           <h1>Iniciar sesión</h1>
           <form>
             <TextField 
-              label="Correo electrónico" 
+              label='Correo electrónico'
               placeholder='Ingresa tu correo electrónico'
             />
             <TextField 
-              label="Contraseña" 
+              label='Contraseña'
+              type='password'
               placeholder='Ingresa tu contraseña'
             />
             <PrimaryButton>Iniciar sesión</PrimaryButton>
-            <Link href="/register">
+            <Link href='/register'>
               <a className={styles.link} >Recuperar contraseña</a>
             </Link>
           </form>
 
           <p className={styles.divider}><span>Iniciar sesión con</span></p>
           <div className={styles.socialMedia}>
-            <IconButton icon="Google" />
+            <IconButton icon='Google' />
           </div>
         </div>
       </div>

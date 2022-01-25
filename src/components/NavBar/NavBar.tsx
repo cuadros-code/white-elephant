@@ -14,8 +14,7 @@ const NavBar = () => {
       <header className={styles.header}>
         <nav className={styles.nav}>
           <div>
-            <Image 
-              // src={"/3d.png"}
+            <Image
               src={"/elephant-logo.png"}
               alt="logo"
               width={40}
@@ -61,7 +60,7 @@ const NavBar = () => {
               </Link>
             </li>
             <li>
-              <Link href={"/"}>
+              <Link href={"/register"}>
                 <a className={styles.last_item}>Registrarse</a>
               </Link>
             </li>
