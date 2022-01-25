@@ -1,6 +1,7 @@
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import styles from './PrimaryButton.module.css';
 
-interface Props extends React.HTMLAttributes<HTMLButtonElement> {
+interface Props extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
   children: React.ReactNode;
 }
 
