@@ -9,7 +9,7 @@ const Layout = ( { children }: Props ) => {
   return (
     <>
       <NavBar />
-      <main>
+      <main style={{maxWidth: '1800px', margin: '0 auto'}}>
         { children }
       </main>
     </>
