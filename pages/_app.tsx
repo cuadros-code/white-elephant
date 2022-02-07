@@ -7,15 +7,26 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
      <Head>
-         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link
-            rel="stylesheet"
+            rel="preload"
             href="/assets/Dongle-Regular.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
           />
-         {/* eslint-disable-next-line @next/next/no-css-tags */}
           <link
-            rel="stylesheet"
+            rel="preload"
             href="/assets/Dongle-Bold.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/assets/Dongle-Light.ttf"
+            as="font"
+            type="font/ttf"
+            crossOrigin="anonymous"
           />
       </Head>
       <Layout>
