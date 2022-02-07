@@ -1,12 +1,10 @@
 import create from 'zustand'
-
 export interface User {
   id    : string
   name  : string
   email : string
   token : string
 }
-
 interface AuthState {
   user          : User | null
   isLoggedIn    : boolean

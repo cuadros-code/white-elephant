@@ -2,8 +2,13 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Layout } from '../src/components/index'
+import { useMessageError } from '../src/store/messageStore';
+import MessageAlert from 'src/components/Alert/MessageAlert';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+  const { error, messageError, type } = useMessageError( state => state )
+
   return (
     <>
      <Head>
@@ -29,6 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             crossOrigin="anonymous"
           />
       </Head>
+      { error && <MessageAlert type={type} message={messageError} /> }
       <Layout>
         <Component {...pageProps} />
       </Layout>

@@ -1,0 +1,82 @@
+.alert {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 15px;
+  z-index: 1;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}  
+
+.message{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.message span{
+  margin-left: 15px;
+}
+
+.meter { 
+  width: 100%;
+  height: 6px;
+  position: relative;
+  background: #f3efe6;
+  overflow: hidden;
+}
+
+.meter span {
+  display: block;
+  height: 100%;
+  margin: 0;
+}
+
+.progress {
+  background-color: #000c77;
+  -webkit-animation: progressBar 4s ease-out;
+  -webkit-animation-fill-mode: backwards;
+}
+
+@keyframes progressBar {
+  0% { width: 0; }
+  100% { width: 100%; }
+}
+
+
+.error{
+  background-color: #f44336;
+}
+
+.warning{
+  background-color: #ff9800;
+}
+
+.info{
+  background-color: #2196f3;
+}
+
+.success{
+  background-color: #4caf50;
+}
