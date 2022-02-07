@@ -29,7 +29,7 @@ const Login = () => {
         <div className={styles.containerForm} >
           <div className={styles.form}>
             <h1>Iniciar sesión</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
               <TextField
                 {...register('email')} 
                 label='Correo electrónico'

@@ -36,7 +36,7 @@ const Register = () => {
         <div className={styles.containerForm}>
           <div className={styles.form}>
             <h1>Registro</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
               <div className={styles.names}>
                 <div>
                   <TextField
