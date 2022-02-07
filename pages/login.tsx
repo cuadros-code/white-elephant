@@ -3,25 +3,16 @@ import { IconButton, PrimaryButton, TextField, RequiredMessage } from 'src/compo
 import styles from '../styles/Login.module.css'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import { schemaLogin } from 'src/validation/schemeForm';
 interface IFormLogin {
   email   : string
   password: number
 }
 
-const schema = yup.object({
-  email   : yup.string()
-              .email('Ingrese un correo valido')
-              .required('Ingresa tu correo electrónico'),
-  password: yup.string()
-              .min(6, 'La contraseña debe tener al menos 6 caracteres')
-              .required('Ingresa tu contraseña')
-}).required();
-
 const Login = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<IFormLogin>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schemaLogin)
   });
 
   const onSubmit = (data: IFormLogin) => console.log(data);

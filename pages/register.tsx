@@ -2,33 +2,32 @@ import { IconButton, PrimaryButton, RequiredMessage, TextField } from 'src/compo
 import styles from '../styles/Register.module.css'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-
+import { schemaRegister } from 'src/validation/schemeForm';
+import { useEffect } from 'react';
+import useAuth from 'src/hooks/useAuth';
 interface IFormRegister {
   name    : string
   lastname: string
   email   : string
-  password: number
+  password: string
 }
-
-const schema = yup.object({
-  name    : yup.string().required('Ingresa tu nombre'),
-  lastname: yup.string().required('Ingresa tu apellido'),
-  email   : yup.string()
-              .email('Ingrese un correo valido')
-              .required('Ingresa tu correo electrónico'),
-  password: yup.string()
-              .min(6, 'La contraseña debe tener al menos 6 caracteres')
-              .required('Ingresa tu contraseña')
-}).required();
 
 const Register = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm<IFormRegister>({
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schemaRegister)
   });
+  const { createUser } = useAuth()
 
-  const onSubmit = (data: IFormRegister) => console.log(data);
+  useEffect(() => {
+
+  }, []);
+  
+  const onSubmit = (data: IFormRegister) => {
+    const { name, lastname, email, password } = data
+    const fullname = `${name} ${lastname}`
+    createUser( fullname, email, password )
+  };
 
   return (
     <>
