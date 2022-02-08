@@ -1,6 +1,6 @@
 import create, { GetState, SetState } from 'zustand'
 
-type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading' | null
+export type MessageType = 'info' | 'success' | 'warning' | 'error' | 'loading' 
 
 interface Message {
   error: boolean, 
@@ -18,7 +18,7 @@ interface ErrorState {
 export const useMessageError = create<ErrorState>((set, get) => ({
   error         : false,
   messageError  : '',
-  type          : null,
+  type          : 'info',
   setError      : ( props: Message ) => set((state) => ({
      ...state, 
      error      : props.error, 

@@ -1,11 +1,11 @@
 import styles from './MessageAlert.module.css'
 import { MdError } from 'react-icons/md'
-import { useMessageError } from 'src/store/messageStore';
+import { MessageType, useMessageError } from 'src/store/messageStore';
 import { useEffect, useState } from 'react';
 
 interface MessageAlertProps {
   message : string;
-  type    : 'error' | 'success' | 'warning' | 'info';
+  type    : MessageType;
 }
 
 const MessageAlert = ( { message, type }: MessageAlertProps ) => {
@@ -14,7 +14,11 @@ const MessageAlert = ( { message, type }: MessageAlertProps ) => {
   
   useEffect(() => {
     const interval = setTimeout(() => {
-      setError(false, '', null)
+      setError({
+        error: false,
+        message: '',
+        type: 'info'
+      })
     }
     , 4000)
     return () => clearTimeout(interval)
