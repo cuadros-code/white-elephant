@@ -12,7 +12,7 @@ interface IFormLogin {
 
 const Login = () => {
 
-  const { signInWithEmail, loadAuthenticate } = useAuth()
+  const { signInWithEmail, loadAuthenticate, authenticateWithGoogle } = useAuth()
   
   const { register, handleSubmit, formState: { errors } } = useForm<IFormLogin>({
     resolver: yupResolver(schemaLogin)
@@ -60,7 +60,11 @@ const Login = () => {
             </form>
             <p className={styles.divider}><span>Iniciar sesión con</span></p>
             <div className={styles.socialMedia}>
-              <IconButton icon='Google' />
+              <IconButton 
+                onClick={authenticateWithGoogle}
+                disabled={loadAuthenticate}
+                icon='Google' 
+              />
             </div>
           </div>
         </div>

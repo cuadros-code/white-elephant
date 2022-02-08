@@ -17,7 +17,7 @@ const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<IFormRegister>({
     resolver: yupResolver(schemaRegister)
   });
-  const { createUser, loadAuthenticate } = useAuth()
+  const { createUser, loadAuthenticate, authenticateWithGoogle } = useAuth()
   
   const onSubmit = (data: IFormRegister) => {
     const { name, lastname, email, password } = data
@@ -82,7 +82,11 @@ const Register = () => {
 
             <p className={styles.divider}><span>Registro con</span></p>
             <div className={styles.socialMedia}>
-              <IconButton icon='Google' />
+              <IconButton 
+                onClick={authenticateWithGoogle}
+                disabled={loadAuthenticate}
+                icon='Google' 
+              />
             </div>
           </div>
         </div>

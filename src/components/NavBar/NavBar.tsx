@@ -4,10 +4,52 @@ import Link from "next/link"
 import { AiOutlineMenu } from "react-icons/ai"
 import { ImCancelCircle } from "react-icons/im"
 import styles from "./NavBar.module.css"
+import { useStoreAuth } from "src/store/authStore"
+import useAuth from "src/hooks/useAuth"
 
 const NavBar = () => {
 
+  const auth = useStoreAuth( auth => auth )
+  const { closeSession } = useAuth()
   const [menuMobile, setMenuMobile] = useState(false)
+
+  const UserExists = () => {
+    if( auth.isLoggedIn === undefined )
+      return null
+    return (
+      <>
+        <li>
+          <Link href={"/dashboard/profile"}>
+            <a>Perfil</a>
+          </Link>
+        </li>
+
+        <li onClick={closeSession}>
+          <a className={styles.last_item}>Cerrar sesión</a>
+        </li>
+      </>
+    )
+  }
+
+  const UserNotExists = () => {
+    if( auth.isLoggedIn === undefined )
+      return null
+    return (
+      <>
+        <li>
+          <Link href={"/login"}>
+            <a>Iniciar sesión</a>
+          </Link>
+        </li>
+        <li>
+          <Link href={"/register"}>
+            <a className={styles.last_item}>Registrarse</a>
+          </Link>
+        </li>
+      </>
+    )
+  }
+
 
   return (
     <>
@@ -39,9 +81,7 @@ const NavBar = () => {
               /> 
             }
           </button>
-
-          
-          
+                    
         </nav>
           <ul className={`${styles.nav_list} ${menuMobile ? styles.active : ""}`}>
             <li>
@@ -54,16 +94,13 @@ const NavBar = () => {
                 <a>Casos</a>
               </Link>
             </li>
-            <li>
-              <Link href={"/login"}>
-                <a>Iniciar sesión</a>
-              </Link>
-            </li>
-            <li>
-              <Link href={"/register"}>
-                <a className={styles.last_item}>Registrarse</a>
-              </Link>
-            </li>
+            {
+              auth.isLoggedIn
+              ? 
+              <UserExists />
+              :
+              <UserNotExists />
+            }
           </ul>
       </header>
     </>

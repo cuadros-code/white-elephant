@@ -10,6 +10,8 @@ export const formatErrorMessage = (error: string) => {
       return 'El usuario no existe'
     case 'auth/wrong-password':
       return 'El usuario o contraseña es incorrecta'
+    case 'auth/popup-closed-by-user':
+      return 'Acción cancelada'
     default:
       return 'Error de autenticación'
   }

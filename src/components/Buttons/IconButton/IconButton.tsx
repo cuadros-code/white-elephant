@@ -1,14 +1,14 @@
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import { FcGoogle } from 'react-icons/fc'
+import { Loading } from 'src/components';
 import styles from './IconButton.module.css';
 
 type Icon = 'Google'
-
-
-interface Props extends React.HTMLAttributes<HTMLButtonElement> {
+interface Props extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
   icon : Icon;
 }
 
-const IconButton = ( { icon, ...rest }: Props ) => {
+const IconButton = ( { icon, disabled,...rest }: Props ) => {
 
   const IconComponent = () => {
     switch ( icon ) {
@@ -22,10 +22,11 @@ const IconButton = ( { icon, ...rest }: Props ) => {
   return (
     <>  
       <button 
-        className={styles.iconButton}
+        className={`${styles.iconButton} ${disabled && styles.disabled }`}
+        disabled={disabled}
         {...rest}
         >
-        <IconComponent />
+         {disabled ? <Loading /> : <IconComponent />}
       </button>
       <span className={styles.description} >{ icon }</span>
     </>
