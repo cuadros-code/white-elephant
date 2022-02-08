@@ -1,4 +1,4 @@
-import { IconButton, PrimaryButton, RequiredMessage, TextField } from 'src/components';
+import { IconButton, Loading, PrimaryButton, RequiredMessage, TextField } from 'src/components';
 import styles from '../styles/Register.module.css'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,11 +17,7 @@ const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<IFormRegister>({
     resolver: yupResolver(schemaRegister)
   });
-  const { createUser } = useAuth()
-
-  useEffect(() => {
-
-  }, []);
+  const { createUser, loadAuthenticate } = useAuth()
   
   const onSubmit = (data: IFormRegister) => {
     const { name, lastname, email, password } = data
@@ -47,6 +43,7 @@ const Register = () => {
                     />
                   <RequiredMessage>{errors.name?.message}</RequiredMessage>
                 </div>
+
                 <div>
                   <TextField
                     label='Apellidos'
@@ -75,7 +72,12 @@ const Register = () => {
                 />
               <RequiredMessage>{errors.password?.message}</RequiredMessage>
 
-              <PrimaryButton type='submit'>Registrarse</PrimaryButton>
+              <PrimaryButton 
+                type='submit'
+                disabled={loadAuthenticate}
+              >
+                {loadAuthenticate ? <Loading /> : 'Registrarse'}
+              </PrimaryButton>
             </form>
 
             <p className={styles.divider}><span>Registro con</span></p>

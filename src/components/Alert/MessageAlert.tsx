@@ -1,7 +1,7 @@
+import { useEffect } from 'react';
 import styles from './MessageAlert.module.css'
 import { MdError } from 'react-icons/md'
 import { MessageType, useMessageError } from 'src/store/messageStore';
-import { useEffect, useState } from 'react';
 
 interface MessageAlertProps {
   message : string;
@@ -22,6 +22,7 @@ const MessageAlert = ( { message, type }: MessageAlertProps ) => {
     }
     , 4000)
     return () => clearTimeout(interval)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

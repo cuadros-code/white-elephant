@@ -5,10 +5,11 @@ interface Props extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement
   children: React.ReactNode;
 }
 
-const PrimaryButton = ( { children, ...rest }: Props ) => {
+const PrimaryButton = ( { children, disabled , ...rest }: Props ) => {
   return (
     <button 
-      className={styles.primaryButton}
+      className={`${styles.primaryButton} ${disabled && styles.disabled }`}
+      disabled={disabled}
       {...rest}
     >
       {children}

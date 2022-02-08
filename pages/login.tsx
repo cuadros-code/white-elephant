@@ -1,21 +1,24 @@
 import Link from 'next/link';
-import { IconButton, PrimaryButton, TextField, RequiredMessage } from 'src/components';
+import { IconButton, PrimaryButton, TextField, RequiredMessage, Loading } from 'src/components';
 import styles from '../styles/Login.module.css'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaLogin } from 'src/validation/schemeForm';
+import useAuth from 'src/hooks/useAuth';
 interface IFormLogin {
   email   : string
-  password: number
+  password: string
 }
 
 const Login = () => {
 
+  const { signInWithEmail, loadAuthenticate } = useAuth()
+  
   const { register, handleSubmit, formState: { errors } } = useForm<IFormLogin>({
     resolver: yupResolver(schemaLogin)
   });
 
-  const onSubmit = (data: IFormLogin) => console.log(data);
+  const onSubmit = (data: IFormLogin) => signInWithEmail(data.email, data.password);
 
   return (
     <>
@@ -45,7 +48,12 @@ const Login = () => {
                 error={errors.password}
               />
               <RequiredMessage>{errors.password?.message}</RequiredMessage>
-              <PrimaryButton type='submit'>Iniciar sesión</PrimaryButton>
+              <PrimaryButton 
+                type='submit'
+                disabled={loadAuthenticate}
+              >
+                {loadAuthenticate ? <Loading /> : 'Iniciar sesión'}
+              </PrimaryButton>
               <Link href='/register'>
                 <a className={styles.link} >Recuperar contraseña</a>
               </Link>

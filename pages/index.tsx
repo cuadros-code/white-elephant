@@ -1,19 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { useMessageError } from '../src/store/messageStore';
 
 const Home: NextPage = () => {
-
-  const setError = useMessageError( state => state.setError )
-
-  const click = () => {
-    setError({
-      error   : true,
-      message : 'Error message',
-      type    : 'error'
-    })
-  }
   
   return (
     <div >
@@ -42,9 +31,6 @@ const Home: NextPage = () => {
           Elefante blanco es una plataforma que permite a los ciudadanos
           registrar actos de corrupción.
         </p>
-
-        <button onClick={click} >Message</button>
-
       </main>
     </div>
   )

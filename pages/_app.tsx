@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Layout } from '../src/components/index'
 import { useMessageError } from '../src/store/messageStore';
-import MessageAlert from 'src/components/Alert/MessageAlert';
+import { MessageAlert } from 'src/components/index';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
