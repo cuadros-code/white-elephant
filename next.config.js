@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   optimizeFonts: true,
+  images: {
+    domains: ['lh3.googleusercontent.com', 'via.placeholder.com'],
+  },
   async headers() {
     return [
       {

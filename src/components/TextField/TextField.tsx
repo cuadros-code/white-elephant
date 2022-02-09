@@ -8,7 +8,7 @@ interface TextFieldProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInput
 
 const TextField = forwardRef<any, any>(( props: TextFieldProps, ref ) => {
 
-  const { label, error, ...rest } = props
+  const { label, error, disabled ,...rest } = props
 
   return (
     <>
@@ -16,8 +16,9 @@ const TextField = forwardRef<any, any>(( props: TextFieldProps, ref ) => {
         { label }
       </label>
       <input 
-        className={`${styles.field} ${error && styles.error }`} 
+        className={`${styles.field} ${error && styles.error } ${disabled && styles.disabled}`} 
         {...rest} 
+        disabled={disabled}
         ref={ref}
       />
     </>

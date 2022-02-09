@@ -19,7 +19,6 @@ import { useRouter } from 'next/router';
 // this hook contains all the logic to handle the authentication
 const useAuth = () => {
 
-  const router = useRouter();
   const authStore = useStoreAuth( auth => auth );
   const message = useMessageError( state => state );
   const [loadAuthenticate, setloadAuthenticate] = useState(false);
@@ -27,7 +26,6 @@ const useAuth = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged( auth ,(user) => {
       if (user) {
-        router.push('/dashboard');
         onStateChange(user)
       } else {
         authStore.setClearUser();
@@ -41,7 +39,7 @@ const useAuth = () => {
       setloadAuthenticate(true)
       const user = auth.currentUser
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-      user && await updateProfile(user, { displayName: fullName })
+      await updateProfile(userCredential.user, { displayName: fullName })
 
       if(user && userCredential.user) {
         registerInStore(userCredential)
@@ -112,7 +110,8 @@ const useAuth = () => {
       id    : credential.user.uid,
       name  : credential.user.displayName!,
       email : credential.user.email!,
-      token : credential.user.uid!
+      token : credential.user.uid!,
+      photo : credential.user.photoURL!
     })
     authStore.setIsLoggedIn(true)
   }
@@ -122,7 +121,9 @@ const useAuth = () => {
       id    : user.uid,
       name  : user.displayName!,
       email : user.email!,
-      token : user.uid!
+      token : user.uid!,
+      photo : user.photoURL!
+
     })
     authStore.setIsLoggedIn(true)
   }

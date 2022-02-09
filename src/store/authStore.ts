@@ -4,6 +4,7 @@ export interface User {
   name  : string
   email : string
   token : string
+  photo : string
 }
 interface AuthState {
   user          : User | null
