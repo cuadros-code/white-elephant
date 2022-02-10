@@ -63,19 +63,22 @@ const Profile = () => {
 
       <div className={styles.contentProfile}>
         <div className={styles.contentInfo}>
-          <Image
-            className={styles.avatar}
-            src={ imageProfile } 
-            alt={user?.name}
-            width={100}
-            height={100}
-          />
-          <input 
-            onChange={uploadImage} 
-            type="file" 
-            accept='image/png, image/jpg' 
-            multiple={false}
-          />
+          <div style={{position: 'relative'}}>
+            <Image
+              className={styles.avatar}
+              src={ imageProfile } 
+              alt={user?.name}
+              width={100}
+              height={100}
+              />
+            <input 
+              className={styles.inputFile}
+              onChange={uploadImage} 
+              type="file" 
+              accept='image/png, image/jpg' 
+              multiple={false}
+              />
+          </div>
           <form 
             onSubmit={handleSubmit(onSubmit)} 
             autoComplete='off'
