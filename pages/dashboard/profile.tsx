@@ -43,7 +43,8 @@ const Profile = () => {
 
   const uploadImage = async ( event: ChangeEvent<HTMLInputElement> ) => {
     
-    if( event.target.files ) {
+    if( event.target.files && event.target.files.length ) {
+
       const file = event.target.files[0]
       const reader = new FileReader();
       const imagesRef = ref(storage, `images/${file.name}`);
