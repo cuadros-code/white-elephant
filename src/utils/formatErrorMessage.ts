@@ -12,6 +12,8 @@ export const formatErrorMessage = (error: string) => {
       return 'El usuario o contraseña es incorrecta'
     case 'auth/popup-closed-by-user':
       return 'Acción cancelada'
+    case 'auth/user-token-expired':
+      return 'Acción inválida'
     default:
       return 'Error de autenticación'
   }

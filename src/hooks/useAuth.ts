@@ -15,6 +15,7 @@ import { formatErrorMessage } from '../utils/formatErrorMessage';
 import { AuthError } from "src/interfaces/IAuthError";
 import { useMessageError } from '../store/messageStore';
 import { useRouter } from 'next/router';
+import { IUpdateProfile } from 'src/interfaces/IUpdateProfile';
 
 // this hook contains all the logic to handle the authentication
 const useAuth = () => {
@@ -90,6 +91,22 @@ const useAuth = () => {
     }
   }
 
+  const updateUserProfile = async ( {displayName, photoURL}: IUpdateProfile) => { 
+    try {
+      setloadAuthenticate(true)
+      const user = auth.currentUser
+      if(user) {
+        await updateProfile( user, { displayName, photoURL })
+      }
+    } catch (error) {
+      const err = error as AuthError
+      const code = formatErrorMessage(err.code)
+      showMessageError(code)
+    } finally {
+      setloadAuthenticate(false)
+    }
+  }
+
   const closeSession = async () => {
     try {
       setloadAuthenticate(true)
@@ -142,6 +159,7 @@ const useAuth = () => {
   return {
     createUser,
     authenticateWithGoogle,
+    updateUserProfile,
     signInWithEmail,
     closeSession,
     loadAuthenticate

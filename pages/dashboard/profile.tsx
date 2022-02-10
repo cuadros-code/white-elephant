@@ -1,6 +1,11 @@
+import { getDownloadURL, ref } from 'firebase/storage';
 import Image from 'next/image';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { PrimaryButton, TextField } from 'src/components';
+import { Loading, PrimaryButton, TextField } from 'src/components';
+import { imagesRef, storage } from 'src/config/firebaseConfig';
+import useAuth from 'src/hooks/useAuth';
+import useUploadFile from 'src/hooks/useUploadFile';
 import { useStoreAuth } from 'src/store/authStore';
 import styles from 'styles/Profile.module.css';
 
@@ -11,14 +16,47 @@ interface IFormLogin {
 
 const Profile = () => {
 
-  const { user } = useStoreAuth( auth => auth )
+  const [imageProfile, setImageProfile] = useState<string>('https://via.placeholder.com/150')
 
+  const { user } = useStoreAuth( auth => auth )
+  const { updateUserProfile, loadAuthenticate } = useAuth()
+  const { loadingFile, uploadFile } = useUploadFile()
   const { register, handleSubmit, formState: { errors } } = useForm<IFormLogin>({
     defaultValues: {
       name  : user?.name,
       email : user?.email,
     }
   });
+
+  useEffect(() => {
+    user?.photo && setImageProfile(user?.photo)
+  }, [user])
+  
+
+  const onSubmit = (data: IFormLogin) => {
+    const { name } = data
+    updateUserProfile({
+      displayName: name,
+      photoURL   : user?.photo || '',
+    })
+  }
+
+  const uploadImage = async ( event: ChangeEvent<HTMLInputElement> ) => {
+    
+    if( event.target.files ) {
+      const file = event.target.files[0]
+      const reader = new FileReader();
+      const imagesRef = ref(storage, `images/${file.name}`);
+      reader.readAsDataURL(file);
+      const url = await uploadFile(imagesRef, file )
+      setImageProfile(url!)
+      updateUserProfile({
+        photoURL: url,
+      })
+
+    }
+  }
+
 
   return (
     <div className={styles.container}>
@@ -27,12 +65,21 @@ const Profile = () => {
         <div className={styles.contentInfo}>
           <Image
             className={styles.avatar}
-            src={user?.photo || 'https://via.placeholder.com/150'} 
+            src={ imageProfile } 
             alt={user?.name}
             width={100}
             height={100}
           />
-          <form autoComplete='off'>
+          <input 
+            onChange={uploadImage} 
+            type="file" 
+            accept='image/png, image/jpg' 
+            multiple={false}
+          />
+          <form 
+            onSubmit={handleSubmit(onSubmit)} 
+            autoComplete='off'
+          >
             <TextField
               {...register('name')} 
               label='Nombre'
@@ -46,8 +93,11 @@ const Profile = () => {
               placeholder='Ingresa tu correo electrónico'
             />
       
-            <PrimaryButton type='submit'>
-              Actualizar
+            <PrimaryButton 
+              type='submit'
+              disabled={loadAuthenticate || loadingFile}
+            >
+              {loadAuthenticate || loadingFile ? <Loading /> : 'Actualizar'}
             </PrimaryButton>
           </form>
 
