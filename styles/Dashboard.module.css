@@ -17,6 +17,11 @@
   border-bottom-right-radius: 18px;
 }
 
+.navDashboard a:focus-visible {
+  outline: none;
+  background-color: #e1e1e1;
+}
+
 .navDashboard a span{
   visibility: hidden;
   position: absolute;
@@ -33,4 +38,8 @@
 .navDashboard a:hover span{
   visibility: visible;
   opacity:1;
+}
+
+.children{
+  margin-left: 60px;
 }
