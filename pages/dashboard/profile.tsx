@@ -63,8 +63,9 @@ const Profile = () => {
     <div className={styles.container}>
 
       <div className={styles.contentProfile}>
+        
         <div className={styles.contentInfo}>
-          <div style={{position: 'relative'}}>
+          <div className={styles.contentImage}>
             <Image
               className={styles.avatar}
               src={ imageProfile } 

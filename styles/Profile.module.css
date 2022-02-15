@@ -16,6 +16,10 @@
   background-color: #f7f7f7;
 }
 
+.contentImage{
+  position: relative;
+}
+
 .contentProfile{
   position: relative;
   top: -30px;
@@ -68,10 +72,25 @@
   left: 0px;
   height: 100px;
   width: 100px;
-
   background-image: url('/camera.png');
   background-repeat: no-repeat;
   background-size: 50px;
   opacity: 0.4;
   background-position: center;
+}
+
+@media (max-width: 768px){
+  .contentProfile{
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .container{
+    padding: 0 40px;
+  }
+}
+
+@media (max-width: 500px){
+  .container{
+    padding: 0;
+  }
 }

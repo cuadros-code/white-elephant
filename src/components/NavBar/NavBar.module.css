@@ -51,7 +51,7 @@
 
   .header{
     margin: 10px;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 10px 5px 10px;
     background-color: red;
     border-radius: 10px;
     background-color: #e1e1e1;
@@ -71,6 +71,10 @@
     flex-direction: column;
     margin: auto 0;
     align-items: center;
+  }
+
+  .last_item{
+    margin-bottom: 10px;
   }
 
   .active li{
