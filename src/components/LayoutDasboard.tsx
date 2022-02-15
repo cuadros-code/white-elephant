@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import styles from 'styles/Dashboard.module.css';
-import { RiAddCircleLine, RiEdit2Line, RiSettings2Line, RiStickyNoteLine } from 'react-icons/ri';
+import { RiAddCircleLine, 
+        RiEdit2Line, 
+        RiSettings2Line, 
+        RiStickyNoteLine,
+        RiHome2Line } from 'react-icons/ri';
 import { ReactElement } from 'react';
 import { useRouter } from 'next/router';
 
@@ -19,6 +23,14 @@ const LayoutDashboard = ({ children }: Props) => {
   return (
     <>
       <div className={styles.navDashboard}>
+          <Link href='/dashboard'>
+            <a>
+              <RiHome2Line 
+                color={colorIcon('/dashboard')}
+              /> 
+              <span>Panel</span>
+            </a>
+          </Link>
           <Link href='/dashboard/create'>
             <a>
               <RiAddCircleLine 
