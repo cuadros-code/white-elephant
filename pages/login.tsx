@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaLogin } from 'src/validation/schemeForm';
 import useAuth from 'src/hooks/useAuth';
+import useProtected from 'src/hooks/useProtected';
 interface IFormLogin {
   email   : string
   password: string
@@ -12,14 +13,17 @@ interface IFormLogin {
 
 const Login = () => {
 
+  const { authenticatedUser } = useProtected('/dashboard', 'public')
+
   const { signInWithEmail, loadAuthenticate, authenticateWithGoogle } = useAuth()
-  
   const { register, handleSubmit, formState: { errors } } = useForm<IFormLogin>({
     resolver: yupResolver(schemaLogin)
   });
 
   const onSubmit = (data: IFormLogin) => signInWithEmail(data.email, data.password);
 
+  if(authenticatedUser) return <h1>Cargando...</h1> 
+  
   return (
     <>
       <div className={styles.container}>

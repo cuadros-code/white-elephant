@@ -3,8 +3,8 @@ import styles from '../styles/Register.module.css'
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaRegister } from 'src/validation/schemeForm';
-import { useEffect } from 'react';
 import useAuth from 'src/hooks/useAuth';
+import useProtected from 'src/hooks/useProtected';
 interface IFormRegister {
   name    : string
   lastname: string
@@ -14,16 +14,20 @@ interface IFormRegister {
 
 const Register = () => {
 
+  const { authenticatedUser } = useProtected('/dashboard', 'public')
+
   const { register, handleSubmit, formState: { errors } } = useForm<IFormRegister>({
     resolver: yupResolver(schemaRegister)
   });
   const { createUser, loadAuthenticate, authenticateWithGoogle } = useAuth()
-  
+
   const onSubmit = (data: IFormRegister) => {
     const { name, lastname, email, password } = data
     const fullname = `${name} ${lastname}`
     createUser( fullname, email, password )
   };
+
+  if(authenticatedUser) return <h1>Cargando...</h1> 
 
   return (
     <>

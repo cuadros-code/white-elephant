@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { RiAddCircleLine, 
@@ -7,6 +7,8 @@ import { RiAddCircleLine,
         RiStickyNoteLine,
         RiHome2Line } from 'react-icons/ri';
 import styles from 'styles/Dashboard.module.css';
+import { useStoreAuth } from 'src/store/authStore';
+import useProtected from 'src/hooks/useProtected';
 interface Props {
   children: ReactElement | ReactElement[]
 }
@@ -15,11 +17,15 @@ const LayoutDashboard = ({ children }: Props) => {
 
   const [openMenu, setOpenMenu] = useState(false)
   const router = useRouter()
+  
+  const { unauthenticatedUser } = useProtected('/login', 'private')
 
   const colorIcon = (path: string) => {
     return router.pathname === path ? '#005cd4' : '#000'
   }
 
+  if(unauthenticatedUser) return null 
+    
   return (
     <>
       <div 
