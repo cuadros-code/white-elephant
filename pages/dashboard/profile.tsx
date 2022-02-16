@@ -14,12 +14,14 @@ interface IFormLogin {
   email   : string
 }
 
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+
 const Profile = () => {
 
   const [imageProfile, setImageProfile] = useState<string>('https://via.placeholder.com/150')
 
   const { user } = useStoreAuth( auth => auth )
-  const { updateUserProfile, loadAuthenticate } = useAuth()
+  const { updateUserProfile, loadAuthenticate, showMessageError } = useAuth()
   const { loadingFile, uploadFile } = useUploadFile()
   const { register, handleSubmit, formState: { errors } } = useForm<IFormLogin>({
     defaultValues: {
@@ -42,10 +44,12 @@ const Profile = () => {
   }
 
   const uploadImage = async ( event: ChangeEvent<HTMLInputElement> ) => {
-    
     if( event.target.files && event.target.files.length ) {
-
       const file = event.target.files[0]
+      if( file.size > MAX_FILE_SIZE ) {
+        showMessageError('El tamaño de la imagen no debe superar los 5MB')
+        return
+      }
       const reader = new FileReader();
       const imagesRef = ref(storage, `images/${file.name}`);
       reader.readAsDataURL(file);
@@ -54,7 +58,6 @@ const Profile = () => {
       updateUserProfile({
         photoURL: url,
       })
-
     }
   }
 

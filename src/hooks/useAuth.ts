@@ -162,7 +162,8 @@ const useAuth = () => {
     updateUserProfile,
     signInWithEmail,
     closeSession,
-    loadAuthenticate
+    loadAuthenticate,
+    showMessageError
   }
 };
 
