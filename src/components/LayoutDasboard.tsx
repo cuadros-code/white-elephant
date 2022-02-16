@@ -1,19 +1,19 @@
+import { ReactElement, useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
-import styles from 'styles/Dashboard.module.css';
 import { RiAddCircleLine, 
         RiEdit2Line, 
         RiSettings2Line, 
         RiStickyNoteLine,
         RiHome2Line } from 'react-icons/ri';
-import { ReactElement } from 'react';
-import { useRouter } from 'next/router';
-
+import styles from 'styles/Dashboard.module.css';
 interface Props {
   children: ReactElement | ReactElement[]
 }
 
 const LayoutDashboard = ({ children }: Props) => {
 
+  const [openMenu, setOpenMenu] = useState(false)
   const router = useRouter()
 
   const colorIcon = (path: string) => {
@@ -22,7 +22,10 @@ const LayoutDashboard = ({ children }: Props) => {
 
   return (
     <>
-      <div className={styles.navDashboard}>
+      <div 
+        className={`${styles.navDashboard} ${openMenu ? styles.active : ''}`}
+      >
+          
           <Link href='/dashboard'>
             <a>
               <RiHome2Line 
@@ -63,8 +66,13 @@ const LayoutDashboard = ({ children }: Props) => {
               <span>Configuración</span>
             </a>
           </Link>
+        <button className={styles.actionMenu} onClick={() => setOpenMenu(!openMenu)} >
+          { openMenu ? '>' : '<'} 
+        </button>
       </div>
-      <div className={styles.children}>
+      <div 
+        className={`${styles.children} ${!openMenu ? styles.layout : ''}`}
+      >
         { children }
       </div>
     </>
