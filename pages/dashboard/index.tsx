@@ -1,12 +1,14 @@
 import { ReactElement } from 'react';
-import LayoutDashboard from 'src/components/LayoutDasboard';
+import { LayoutDashboard, CardCreate } from 'src/components';
 import styles from 'styles/DashboardIndex.module.css';
 
 const Dashboard = () => {
   return (
-    <div className={styles.container}>
-      
-    </div>
+    <>
+      <div className={styles.container}>
+        <CardCreate />
+      </div>
+    </>
   )
 };
 
