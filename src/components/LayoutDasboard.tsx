@@ -7,7 +7,6 @@ import { RiAddCircleLine,
         RiStickyNoteLine,
         RiHome2Line } from 'react-icons/ri';
 import styles from 'styles/Dashboard.module.css';
-import { useStoreAuth } from 'src/store/authStore';
 import useProtected from 'src/hooks/useProtected';
 interface Props {
   children: ReactElement | ReactElement[]
@@ -48,10 +47,10 @@ const LayoutDashboard = ({ children }: Props) => {
               <span>Agregar denuncia</span>
             </a>
           </Link>
-          <Link href='/dashboard/edit'>
+          <Link href='/dashboard/profile'>
             <a>
               <RiEdit2Line
-                color={colorIcon('/dashboard/edit')}
+                color={colorIcon('/dashboard/profile')}
               /> 
               <span>Editar perfil</span>
             </a>

@@ -1,19 +1,17 @@
 import { ReactElement } from 'react';
-import { Layout } from 'src/components';
 import LayoutDashboard from 'src/components/LayoutDasboard';
+import styles from 'styles/DashboardIndex.module.css';
 
 const Dashboard = () => {
   return (
-    <>
-      <h1>Dasboard</h1>
-    </>
+    <div className={styles.container}>
+      
+    </div>
   )
 };
 
 export default Dashboard;
 
 Dashboard.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <LayoutDashboard>{page}</LayoutDashboard>
-  )
+  return <LayoutDashboard>{page}</LayoutDashboard>
 }
