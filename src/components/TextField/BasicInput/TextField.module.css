@@ -38,3 +38,9 @@
   color: #333;
   cursor: not-allowed;
 }
+
+.loading{
+  position: absolute;
+  right: 10px;
+  top: -3px;
+}

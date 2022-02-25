@@ -7,10 +7,11 @@ import MessageAlert from 'src/components/Alert/MessageAlert';
 import NavBar from "./NavBar/NavBar";
 import PrimaryButton from './Buttons/PrimaryButton/PrimaryButton';
 import RequiredMessage from './RequiredMessage';
-import TextField from './TextField/TextField';
-
+import TextField from './TextField/BasicInput/TextField';
+import AutoCompleteInput from './TextField/AutoComplete/AutoCompleteInput';
 
 export {
+  AutoCompleteInput,
   CardCreate,
   IconButton,
   Layout,
