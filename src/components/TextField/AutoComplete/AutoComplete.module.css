@@ -18,6 +18,41 @@
   box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
 }
 
+.buttonLocation{
+  display: flex;
+  background-color: var(--color-primary);
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-top: 22px;
+  border: var(--color-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.3s;
+}
+
+.buttonLocation:hover{
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.4);
+  transform: scale(1.05);
+}
+.buttonLocation:hover > * {
+  transform: rotate(180deg);
+}
+
+.buttonLocation:active{
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  transform: scale(1);
+}
+
+.contentLocation{
+  display: grid;
+  grid-template-columns: 1fr 0.05fr;
+  column-gap: 1rem;
+  align-items: center;
+}
+
 @media (max-width: 550px) {
   .containerList{
     width: 80%;

@@ -1,9 +1,10 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import { FcGoogle } from 'react-icons/fc'
+import { BiCurrentLocation } from 'react-icons/bi';
 import { Loading } from 'src/components';
 import styles from './IconButton.module.css';
 
-type Icon = 'Google'
+type Icon = 'Google' | 'CurrentLocation'
 interface Props extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>{
   icon : Icon;
 }
@@ -14,6 +15,8 @@ const IconButton = ( { icon, disabled,...rest }: Props ) => {
     switch ( icon ) {
       case 'Google':
         return <FcGoogle size={25} />;
+      case 'CurrentLocation':
+        return <BiCurrentLocation size={25} />;
       default:
         return null;
     }

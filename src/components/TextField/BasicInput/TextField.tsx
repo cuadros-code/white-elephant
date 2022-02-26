@@ -7,11 +7,12 @@ interface TextFieldProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInput
   error?    : boolean;
   style?    : CSSProperties;
   loading?  : boolean;
+  children? : JSX.Element | JSX.Element[];
 }
 
 const TextField = forwardRef<any, any>(( props: TextFieldProps, ref ) => {
 
-  const { label, error, disabled, loading,...rest } = props
+  const { label, error, disabled, loading, children,...rest } = props
 
   return (
     <>
@@ -24,7 +25,7 @@ const TextField = forwardRef<any, any>(( props: TextFieldProps, ref ) => {
           {...rest}
           disabled={disabled}
           ref={ref}
-          />
+        />
         { loading && <div className={styles.loading}> <Loading /> </div> }
       </span>
     </>
