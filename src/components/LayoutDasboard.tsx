@@ -12,12 +12,29 @@ interface Props {
   children: ReactElement | ReactElement[]
 }
 
+function getWindowDimensions() {
+  const { innerWidth: width } = window;
+  return {
+    width,
+  };
+}
+
 const LayoutDashboard = ({ children }: Props) => {
 
   const [openMenu, setOpenMenu] = useState(false)
   const router = useRouter()
   
   const { unauthenticatedUser } = useProtected('/login', 'private')
+
+  useEffect(() => {
+    function handleResize() {
+      const width = getWindowDimensions();
+      if(width.width < 600) setOpenMenu(true)
+      else setOpenMenu(false)
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const colorIcon = (path: string) => {
     return router.pathname === path ? '#005cd4' : '#000'
