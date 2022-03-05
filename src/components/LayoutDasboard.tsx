@@ -13,15 +13,15 @@ interface Props {
 }
 
 function getWindowDimensions() {
+  if(typeof window === 'undefined') return 
   const { innerWidth: width } = window;
-  return {
-    width,
-  };
+  let validate = width <= 600? true : false
+  return validate
 }
 
 const LayoutDashboard = ({ children }: Props) => {
 
-  const [openMenu, setOpenMenu] = useState(false)
+  const [openMenu, setOpenMenu] = useState(getWindowDimensions())
   const router = useRouter()
   
   const { unauthenticatedUser } = useProtected('/login', 'private')
@@ -29,8 +29,7 @@ const LayoutDashboard = ({ children }: Props) => {
   useEffect(() => {
     function handleResize() {
       const width = getWindowDimensions();
-      if(width.width < 600) setOpenMenu(true)
-      else setOpenMenu(false)
+      setOpenMenu(width)
     }
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);

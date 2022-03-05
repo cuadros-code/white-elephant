@@ -4,8 +4,11 @@ import { BiCurrentLocation } from 'react-icons/bi';
 import { TextField } from 'src/components';
 import { Map, Marker } from "pigeon-maps"
 import styles from './AutoComplete.module.css';
+import { useMessageError } from 'src/store/messageStore';
+
 const AutoCompleteInput = () => {
   
+  const message = useMessageError( state => state );
   const [closeList, setCloseList] = useState(false);
   const [value, setValue] = useState("")
   const [locationState, setLocationState] = useState<[number, number]>([3.3658895, -76.5950555])
@@ -24,7 +27,11 @@ const AutoCompleteInput = () => {
     navigator.geolocation.getCurrentPosition(( data: GeolocationPosition ) => {
       setLocationState([data.coords.latitude, data.coords.longitude]);
     }, () => {
-      console.log("error");
+      message.setError({
+        error: true,
+        message: 'Tiene aplicaciones que no permiten obtener su ubicación',
+        type: 'warning'
+      })
     });
     
   }
