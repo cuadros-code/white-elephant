@@ -55,7 +55,7 @@
 }
 
 .progress {
-  background-color: #000c77;
+  background-color: var(--color-primary);
   -webkit-animation: progressBar 4s ease-out;
   -webkit-animation-fill-mode: backwards;
 }

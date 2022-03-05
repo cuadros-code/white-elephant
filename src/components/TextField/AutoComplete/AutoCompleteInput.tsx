@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import usePlacesService from "react-google-autocomplete/lib/usePlacesAutocompleteService";
-import { TextField } from 'src/components';
-import styles from './AutoComplete.module.css';
 import { BiCurrentLocation } from 'react-icons/bi';
-
+import { TextField } from 'src/components';
+import { Map, Marker } from "pigeon-maps"
+import styles from './AutoComplete.module.css';
 const AutoCompleteInput = () => {
-
+  
   const [closeList, setCloseList] = useState(false);
   const [value, setValue] = useState("")
-
+  const [locationState, setLocationState] = useState<[number, number]>([3.3658895, -76.5950555])
+  
   const {
     placePredictions,
     getPlacePredictions,
@@ -21,7 +22,7 @@ const AutoCompleteInput = () => {
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(( data: GeolocationPosition ) => {
-      console.log(data.coords)
+      setLocationState([data.coords.latitude, data.coords.longitude]);
     }, () => {
       console.log("error");
     });
@@ -57,10 +58,8 @@ const AutoCompleteInput = () => {
               className={styles.list} 
               key={index} 
               onClick={() => { 
-                console.log(item)
                 placesService.getDetails({ placeId: item.place_id }, (data: any) => {
-                  console.log(data.geometry.location.lng())
-                  console.log(data.geometry.location.lat())
+                  setLocationState([data.geometry.location.lat(), data.geometry.location.lng()]);
                 });
                 setValue(item.description);
                 setCloseList(true);
@@ -70,6 +69,15 @@ const AutoCompleteInput = () => {
             </li>
         ))}
       </div>
+
+      <Map 
+        height={300}
+        defaultCenter={locationState} 
+        center={locationState}
+        defaultZoom={11}
+      >
+        <Marker width={50} anchor={locationState} />
+      </Map>
     </div>
   )
 }

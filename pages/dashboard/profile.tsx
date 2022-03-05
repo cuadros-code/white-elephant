@@ -23,15 +23,19 @@ const Profile = () => {
   const { user } = useStoreAuth( auth => auth )
   const { updateUserProfile, loadAuthenticate, showMessageError } = useAuth()
   const { loadingFile, uploadFile } = useUploadFile()
-  const { register, handleSubmit, formState: { errors } } = useForm<IFormLogin>({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormLogin>({
     defaultValues: {
       name  : user?.name,
       email : user?.email,
-    }
+    },
   });
 
   useEffect(() => {
     user?.photo && setImageProfile(user?.photo)
+    reset({
+      name  : user?.name,
+      email : user?.email,
+    })
   }, [user])
   
 
@@ -47,7 +51,9 @@ const Profile = () => {
     if( event.target.files && event.target.files.length ) {
       const file = event.target.files[0]
       if( file.size > MAX_FILE_SIZE ) {
-        showMessageError('El tamaño de la imagen no debe superar los 5MB')
+        showMessageError({
+          text: 'El tamaño del archivo es demasiado grande',
+        })
         return
       }
       const reader = new FileReader();

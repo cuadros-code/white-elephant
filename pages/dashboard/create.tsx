@@ -1,16 +1,23 @@
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement,  } from 'react'
+import dynamic from 'next/dynamic';
 import { useForm } from 'react-hook-form';
 import LayoutDashboard from 'src/components/LayoutDasboard'
 import styles from 'styles/CreateComplaint.module.css'
-import usePlacesService from "react-google-autocomplete/lib/usePlacesAutocompleteService";
-import { AutoCompleteInput, TextField } from 'src/components';
+import { TextField } from 'src/components';
+const AutoCompleteInput = dynamic(
+    () => import("src/components/TextField/AutoComplete/AutoCompleteInput"), 
+    {
+       ssr:false,
+       loading: () => <div>Loading...</div>,
+    }
+)
 interface IFormCreate {
   email   : string
   password: string
 }
 
 const Create = () => {
-  
+
   const { register, handleSubmit, formState: { errors } } = useForm<IFormCreate>({
     // resolver: yupResolver(schemaLogin)
   });

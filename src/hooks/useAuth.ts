@@ -49,7 +49,9 @@ const useAuth = () => {
     } catch (error) {
       const err = error as AuthError
       const code = formatErrorMessage(err.code)
-      showMessageError(code)
+      showMessageError({
+        text: code,
+      })
     } finally {
       setloadAuthenticate(false)
     }
@@ -65,7 +67,9 @@ const useAuth = () => {
     } catch (error) {
       const err = error as AuthError
       const code = formatErrorMessage(err.code)
-      showMessageError(code)
+      showMessageError({
+        text: code,
+      })
     } finally {
       setloadAuthenticate(false)
     }
@@ -85,7 +89,9 @@ const useAuth = () => {
     } catch (error) {
       const err = error as AuthError
       const code = formatErrorMessage(err.code)
-      showMessageError(code)
+      showMessageError({
+        text: code,
+      })
     } finally {
       setloadAuthenticate(false)
     }
@@ -98,10 +104,16 @@ const useAuth = () => {
       if(user) {
         await updateProfile( user, { displayName, photoURL })
       }
+      showMessageError({
+        text: 'Información actualizada correctamente',
+        typeMessage: false
+      })
     } catch (error) {
       const err = error as AuthError
       const code = formatErrorMessage(err.code)
-      showMessageError(code)
+      showMessageError({
+        text: code,
+      })
     } finally {
       setloadAuthenticate(false)
     }
@@ -115,7 +127,9 @@ const useAuth = () => {
     } catch (error) {
       const err = error as AuthError
       const code = formatErrorMessage(err.code)
-      showMessageError(code)
+      showMessageError({
+        text: code,
+      })
     } finally {
       setloadAuthenticate(false)
     }
@@ -146,12 +160,13 @@ const useAuth = () => {
   }
 
 
-
-  const showMessageError = ( text: string ) => {
+  const showMessageError = ( 
+    {text, typeMessage = true}: {text: string, typeMessage?: boolean} 
+  ) => {
     message.setError({
       error: true,
       message: text,
-      type: 'error'
+      type: typeMessage ? 'error' : 'success'
     })
   }
 
