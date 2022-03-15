@@ -44,3 +44,20 @@
   right: 10px;
   top: -3px;
 }
+
+.resetField{
+  position: absolute;
+  right: 10px;
+  top: -3px;
+  display: none;
+}
+
+.resetField button{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.field:hover > .resetField{
+  display: block;
+}

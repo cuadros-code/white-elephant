@@ -8,13 +8,22 @@ import { useMessageError } from 'src/store/messageStore';
 import { UseFormSetValue } from 'react-hook-form';
 
 interface TextFieldProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>{
-  error?    : boolean;
-  reference?: any;
-  setValueForm  : UseFormSetValue<any>
+  error?                : boolean;
+  reference?            : any;
+  setValueForm          : UseFormSetValue<any>
+  hiddenCurrentLocation?: boolean
+
 }
 
 const AutoCompleteInput = (props: TextFieldProps) => {
-  const { error, children, reference, setValueForm, ...rest } = props;
+  const { 
+    error, 
+    children, 
+    reference, 
+    setValueForm, 
+    hiddenCurrentLocation = false,
+    ...rest } = props;
+
   const message = useMessageError( state => state );
   const [closeList, setCloseList] = useState(false);
   const [locationState, setLocationState] = useState<[number, number]>([3.3658895, -76.5950555])
@@ -71,13 +80,16 @@ const AutoCompleteInput = (props: TextFieldProps) => {
             }}
           />
         </div>
-        <button 
+        {
+          !hiddenCurrentLocation &&
+          <button 
           className={styles.buttonLocation}
-          onClick={getLocation}
-          type='button'
-        >
-            <BiCurrentLocation size={25} />
-        </button>
+            onClick={getLocation}
+            type='button'
+          >
+              <BiCurrentLocation size={25} />
+          </button>
+        }
       </div>
 
       <div className={styles.containerList}>

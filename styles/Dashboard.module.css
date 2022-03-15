@@ -11,7 +11,7 @@
   height: calc(100vh - 20%);
   justify-content: space-evenly;
   left: 0;
-  position: absolute;
+  z-index: 1;
   position: fixed;
   width: 60px;
   transition: all 0.3s ease-in-out;
@@ -55,7 +55,6 @@
 .navDashboard a:hover span{
   visibility: visible;
   opacity:1;
-  z-index: 10;
 }
 
 .children{

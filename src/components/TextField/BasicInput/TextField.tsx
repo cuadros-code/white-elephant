@@ -1,5 +1,6 @@
 import { CSSProperties, DetailedHTMLProps, forwardRef, InputHTMLAttributes } from 'react';
 import { Loading } from 'src/components';
+import { GiCancel } from 'react-icons/gi';
 import styles from './TextField.module.css';
 
 interface TextFieldProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>{
@@ -27,6 +28,12 @@ const TextField = forwardRef<any, any>(( props: TextFieldProps, ref ) => {
           ref={ref}
         />
         { loading && <div className={styles.loading}> <Loading /> </div> }
+
+        <div className={styles.resetField}> 
+          <button>
+            <GiCancel size={25} opacity={.3} />
+          </button>
+        </div>         
       </span>
     </>
   );

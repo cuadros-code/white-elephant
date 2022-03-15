@@ -6,10 +6,10 @@ import styles from 'styles/CreateComplaint.module.css'
 import { PrimaryButton, TextField } from 'src/components';
 const AutoCompleteInput = dynamic(() => import("src/components/TextField/AutoComplete/AutoCompleteInput"), { ssr:false})
 interface IFormCreate {
-  email      : string
-  location   : string
-  lat: number
-  lng: number
+  lat                  : number
+  lng                  : number
+  location             : string
+  title                : string
 }
 
 const Create = () => {
@@ -26,13 +26,14 @@ const Create = () => {
     <div className={styles.container}>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
           <TextField
-            {...register('email')} 
+            {...register('title')} 
             label='Titulo de la denuncia'
             placeholder='Ingresa el titulo de la denuncia'
-            error={errors.email}
+            error={errors.title}
           />
           <AutoCompleteInput 
             reference={{...register('location')}}
+            hiddenCurrentLocation={true}
             setValueForm={setValue}
           />
 
