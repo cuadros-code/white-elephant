@@ -9,6 +9,7 @@ import PrimaryButton from './Buttons/PrimaryButton/PrimaryButton';
 import RequiredMessage from './RequiredMessage';
 import TextField from './TextField/BasicInput/TextField';
 import AutoCompleteInput from './TextField/AutoComplete/AutoCompleteInput';
+import TextArea from './TextField/TextArea/TextAreaInput';
 
 export {
   AutoCompleteInput,
@@ -22,4 +23,5 @@ export {
   PrimaryButton,
   RequiredMessage,
   TextField,
+  TextArea,
 }

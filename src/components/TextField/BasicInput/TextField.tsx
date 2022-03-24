@@ -29,11 +29,11 @@ const TextField = forwardRef<any, any>(( props: TextFieldProps, ref ) => {
         />
         { loading && <div className={styles.loading}> <Loading /> </div> }
 
-        <div className={styles.resetField}> 
+        {/* <div className={styles.resetField}> 
           <button>
             <GiCancel size={25} opacity={.3} />
           </button>
-        </div>         
+        </div>          */}
       </span>
     </>
   );

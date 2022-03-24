@@ -3,13 +3,14 @@ import dynamic from 'next/dynamic';
 import { useForm } from 'react-hook-form';
 import LayoutDashboard from 'src/components/LayoutDasboard'
 import styles from 'styles/CreateComplaint.module.css'
-import { PrimaryButton, TextField } from 'src/components';
+import { PrimaryButton, TextField, TextArea } from 'src/components';
 const AutoCompleteInput = dynamic(() => import("src/components/TextField/AutoComplete/AutoCompleteInput"), { ssr:false})
 interface IFormCreate {
-  lat                  : number
-  lng                  : number
-  location             : string
-  title                : string
+  lat          : number
+  lng          : number
+  location     : string
+  description  : string
+  title        : string
 }
 
 const Create = () => {
@@ -35,6 +36,13 @@ const Create = () => {
             reference={{...register('location')}}
             hiddenCurrentLocation={true}
             setValueForm={setValue}
+          />
+
+          <TextArea 
+            {...register('description')}
+            label='Descripción de la denuncia'
+            placeholder='Ingresa la descripción de la denuncia'
+            rows={5}
           />
 
           <PrimaryButton  type='submit'>

@@ -93,6 +93,12 @@ const AutoCompleteInput = (props: TextFieldProps) => {
       </div>
 
       <div className={styles.containerList}>
+        {/* li on close list */}
+        { !closeList && placePredictions.length > 0 && 
+          <li className={styles.listItemClose} onClick={() => setCloseList(true)}>
+            <span>x</span>
+          </li> 
+        }
         { !closeList && placePredictions.map((item, index) => (
             <li 
               className={styles.list} 

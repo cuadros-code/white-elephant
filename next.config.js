@@ -1,9 +1,16 @@
 /** @type {import('next').NextConfig} */
+const withPwa = require('next-pwa');
+const runtimeCaching = require('next-pwa/cache')
+
 const nextConfig = {
   reactStrictMode: true,
   optimizeFonts: true,
   images: {
     domains: ['lh3.googleusercontent.com', 'via.placeholder.com', 'firebasestorage.googleapis.com'],
+  },
+  pwa: {
+    dest: 'public',
+    runtimeCaching
   },
   async headers() {
     return [
@@ -38,4 +45,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+module.exports = withPwa( nextConfig );

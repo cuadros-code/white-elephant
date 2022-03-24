@@ -1,0 +1,25 @@
+.contentTextArea{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.label{
+  font-size: 1.6rem;
+}
+
+.textArea{
+  resize: none;
+  font-size: 1.5rem;
+  padding: 5px;
+  border: 2px solid #e1e1e1;
+  border-radius: 10px;
+}
+
+.textArea:focus {
+  border: 2px solid #00bcd4;
+}
+
+.textArea:focus-visible {
+  outline: none;
+}
