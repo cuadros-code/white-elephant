@@ -1,0 +1,82 @@
+
+.dragAndDrop {
+  height: 200px;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 4px dashed #ccc;
+  border-radius: 10px;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.label{
+  font-size: 1.6rem;
+}
+.contentActions{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.customFileInput::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.customFileInput::before {
+  content: 'Seleccionar archivo';
+  display: inline-block;
+  width: 100%;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.customFileInput:hover::before {
+  border-color: black;
+}
+.customFileInput:active::before {
+  background: -webkit-linear-gradient(top, #1608da, #2942b1);
+}
+
+.deleteButton{
+  visibility: hidden;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: red;
+}
+
+.files{
+  font-size: 1.5rem;
+}
+
+.filesItem{
+  cursor: default;
+  list-style: none;
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filesItem:hover{
+  background-color: #e1e1e1;
+}
+
+.filesItem:hover .deleteButton{
+  visibility: visible;
+}

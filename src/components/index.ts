@@ -10,10 +10,12 @@ import RequiredMessage from './RequiredMessage';
 import TextField from './TextField/BasicInput/TextField';
 import AutoCompleteInput from './TextField/AutoComplete/AutoCompleteInput';
 import TextArea from './TextField/TextArea/TextAreaInput';
+import DragAndDrop from "./DragAndDrop/DragAndDrop";
 
 export {
   AutoCompleteInput,
   CardCreate,
+  DragAndDrop,
   IconButton,
   Layout,
   LayoutDashboard,
@@ -22,6 +24,6 @@ export {
   NavBar,
   PrimaryButton,
   RequiredMessage,
-  TextField,
   TextArea,
+  TextField,
 }
