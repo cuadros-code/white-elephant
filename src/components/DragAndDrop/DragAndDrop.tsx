@@ -1,19 +1,15 @@
 import { DragEvent, useState } from 'react'
+import { UseFormSetValue, UseFormSetError } from 'react-hook-form'
 import styles from './DragAndDrop.module.css'
 
-const DragAndDrop = () => {
+interface IDragAndDrop {
+  setValueForm  : UseFormSetValue<any>
+  setError      : UseFormSetError<any>
+}
+
+const DragAndDrop = ( { setValueForm,setError }: IDragAndDrop ) => {
 
   const [fileList, setFileList] = useState<any[]>([])
-
-  const handleDragEnter = ( e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleDragLeave = ( e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
 
   const handleDragOver = ( e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -25,20 +21,40 @@ const DragAndDrop = () => {
     e.stopPropagation();
     const files = e.dataTransfer.files as any;
     if(!files) return
-    setFileList([...files, ...fileList])
+    const joinFiles = [...files, ...fileList];
+    setValueForm('files', joinFiles);
+    setFileList(joinFiles)
+
+    setError('files', {
+      message: '',
+      type: 'success'
+    });
   };
 
   const handleChange = ( e: React.ChangeEvent<any>) => {
     const files = e.target.files;
     if(!files) return
-    setFileList([...files, ...fileList])
+    const joinFiles = [...files, ...fileList];
+    setValueForm('files', joinFiles);
+    setFileList(joinFiles)
+    setError('files', {
+      message: '',
+      type: 'success'
+    });
   };
 
 
   const deleteFile = (index: number) => {
     const newFileList = [...fileList]
     newFileList.splice(index, 1)
+    setValueForm('files', newFileList);
     setFileList(newFileList)
+    if(newFileList.length === 0){
+      setError('files', {
+        message: 'Ingrese un al menos un archivo',
+        type: 'required'
+      });
+    }
   }
 
   return (
@@ -48,8 +64,6 @@ const DragAndDrop = () => {
         className={styles.dragAndDrop}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
       >
         <div className={styles.contentActions}>
           <p>Arrastra tus archivos</p>
@@ -68,7 +82,8 @@ const DragAndDrop = () => {
             <span>
               {file.name}
             </span>
-            <button 
+            <button
+              type='button'
               className={styles.deleteButton}
               onClick={() => deleteFile(index)}
             >

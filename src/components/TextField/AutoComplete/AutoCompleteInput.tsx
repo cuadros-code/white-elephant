@@ -5,24 +5,20 @@ import { TextField } from 'src/components';
 import { Map, Marker } from "pigeon-maps"
 import styles from './AutoComplete.module.css';
 import { useMessageError } from 'src/store/messageStore';
-import { UseFormSetValue } from 'react-hook-form';
+import { UseFormSetValue, UseFormSetError, ErrorOption } from 'react-hook-form';
 
 interface TextFieldProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>{
-  error?                : boolean;
-  reference?            : any;
   setValueForm          : UseFormSetValue<any>
   hiddenCurrentLocation?: boolean
-
+  setError              : UseFormSetError<any>
 }
 
 const AutoCompleteInput = (props: TextFieldProps) => {
-  const { 
-    error, 
-    children, 
-    reference, 
+  const {
     setValueForm, 
-    hiddenCurrentLocation = false,
-    ...rest } = props;
+    setError,
+    hiddenCurrentLocation = false
+  } = props;
 
   const message = useMessageError( state => state );
   const [closeList, setCloseList] = useState(false);
@@ -52,11 +48,15 @@ const AutoCompleteInput = (props: TextFieldProps) => {
   }
 
   const onClickItemLocation = (item: { place_id: string, description: string }) => {
+    setValueForm('location', item.description);
+    setError('location', {
+      message: '',
+      type: 'success',
+    });
     placesService.getDetails({ placeId: item.place_id }, (data: any) => {
       setLocationState([data.geometry.location.lat(), data.geometry.location.lng()]);
       sendCoordinates(data.geometry.location.lat(), data.geometry.location.lng());
     });
-    setValueForm('location', item.description);
     setCloseList(true);
   }
 
@@ -70,7 +70,6 @@ const AutoCompleteInput = (props: TextFieldProps) => {
       <div className={styles.contentLocation}>
         <div>
           <TextField
-            {...reference}
             loading={isPlacePredictionsLoading}
             label='Dirección'
             placeholder='Ingresa tu dirección'

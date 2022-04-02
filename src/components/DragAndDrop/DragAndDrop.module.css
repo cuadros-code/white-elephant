@@ -8,7 +8,7 @@
   border: 4px dashed #ccc;
   border-radius: 10px;
   font-size: 2rem;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .label{
@@ -30,7 +30,6 @@
   background: var(--color-primary);
   color: white;
   border-radius: 3px;
-  padding: 5px 8px;
   outline: none;
   white-space: nowrap;
   cursor: pointer;
@@ -60,6 +59,7 @@
 
 .files{
   font-size: 1.5rem;
+  margin-bottom: 15px;
 }
 
 .filesItem{

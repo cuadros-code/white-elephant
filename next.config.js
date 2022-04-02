@@ -10,7 +10,7 @@ const nextConfig = {
   },
   pwa: {
     dest: 'public',
-    // disable: true,
+    disable: true,
     runtimeCaching
   },
   async headers() {
