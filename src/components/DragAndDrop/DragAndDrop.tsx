@@ -2,6 +2,13 @@ import { DragEvent, useState } from 'react'
 import { UseFormSetValue, UseFormSetError } from 'react-hook-form'
 import styles from './DragAndDrop.module.css'
 
+const FilesOk = [
+  'image/png',
+  'image/jpeg',
+  'image/jpg',
+  'video/mp4',
+]
+
 interface IDragAndDrop {
   setValueForm  : UseFormSetValue<any>
   setError      : UseFormSetError<any>
@@ -22,9 +29,9 @@ const DragAndDrop = ( { setValueForm,setError }: IDragAndDrop ) => {
     const files = e.dataTransfer.files as any;
     if(!files) return
     const joinFiles = [...files, ...fileList];
-    setValueForm('files', joinFiles);
-    setFileList(joinFiles)
-
+    const validateType = joinFiles.filter(item => FilesOk.includes(item.type) == true )
+    setValueForm('files', validateType);
+    setFileList(validateType)
     setError('files', {
       message: '',
       type: 'success'
@@ -35,8 +42,9 @@ const DragAndDrop = ( { setValueForm,setError }: IDragAndDrop ) => {
     const files = e.target.files;
     if(!files) return
     const joinFiles = [...files, ...fileList];
-    setValueForm('files', joinFiles);
-    setFileList(joinFiles)
+    const validateType = joinFiles.filter(item => FilesOk.includes(item.type) == true )
+    setValueForm('files', validateType);
+    setFileList(validateType)
     setError('files', {
       message: '',
       type: 'success'
@@ -80,7 +88,7 @@ const DragAndDrop = ( { setValueForm,setError }: IDragAndDrop ) => {
         {fileList && fileList.length > 0 && fileList.map((file, index) => (
           <li className={styles.filesItem} key={index}> 
             <span>
-              {file.name}
+              {file?.name}
             </span>
             <button
               type='button'
