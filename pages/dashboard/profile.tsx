@@ -1,9 +1,9 @@
-import { getDownloadURL, ref } from 'firebase/storage';
+import { ref } from 'firebase/storage';
 import Image from 'next/image';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Loading, PrimaryButton, TextField } from 'src/components';
-import { imagesRef, storage } from 'src/config/firebaseConfig';
+import { storage } from 'src/config/firebaseConfig';
 import useAuth from 'src/hooks/useAuth';
 import useUploadFile from 'src/hooks/useUploadFile';
 import { useStoreAuth } from 'src/store/authStore';

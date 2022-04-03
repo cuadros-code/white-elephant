@@ -1,11 +1,17 @@
-import React, { ReactElement,  } from 'react'
+import React, { ReactElement, useState } from 'react'
 import dynamic from 'next/dynamic';
 import { useForm } from 'react-hook-form';
+import { ref } from 'firebase/storage';
+import { addDoc, collection } from 'firebase/firestore';
 import LayoutDashboard from 'src/components/LayoutDasboard'
 import styles from 'styles/CreateComplaint.module.css'
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PrimaryButton, TextField, TextArea, DragAndDrop, RequiredMessage } from 'src/components';
 import { schemaCreate } from 'src/validation/schemeCreate';
+import useUploadFile from 'src/hooks/useUploadFile';
+import { storage,db } from 'src/config/firebaseConfig';
+import { PrimaryButton, TextField, TextArea, DragAndDrop, RequiredMessage } from 'src/components';
+import { useStoreAuth } from 'src/store/authStore';
+import { useMessageError } from 'src/store/messageStore';
 
 const AutoCompleteInput = dynamic(() => import("src/components/TextField/AutoComplete/AutoCompleteInput"), { ssr:false})
 interface IFormCreate {
@@ -19,12 +25,59 @@ interface IFormCreate {
 
 const Create = () => {
 
-  const { register, handleSubmit, formState: { errors }, setValue, setError } = useForm<IFormCreate>({
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors },
+    reset,
+    setValue, 
+    setError 
+  } = useForm<IFormCreate>({
     resolver: yupResolver(schemaCreate)
   });
+  const [loading, setLoading] = useState(false)
+  const { uploadFile } = useUploadFile()
+  const { user } = useStoreAuth( auth => auth )
+  const message = useMessageError( state => state );
 
-  const onSubmit = (data: IFormCreate) => {
-    console.log(data)
+
+  const onSubmit = async (data: IFormCreate) => {
+    setLoading(true)
+    try {
+      const { files, description, location, title } = data
+      const directionFiles = files.map( async (file: any) => {
+        const reader = new FileReader();
+        const imagesRef = ref(storage, `files/${file.name}`);
+        reader.readAsDataURL(file);
+        const url = await uploadFile(imagesRef, file )
+        return url
+      })
+  
+      const listFiles = await Promise.all(directionFiles)
+  
+      await addDoc(collection( db, 'records' ), {
+        uid: user?.id,
+        title,
+        description,
+        location,
+        files: listFiles,
+      })
+      message.setError({
+        error: true,
+        message: 'Registro creado con exito',
+        type: 'success',
+      })
+      
+    } catch (error) {
+      message.setError({
+        error: true,
+        message: 'No se pudo crear el registro',
+        type: 'error',
+      })
+    } finally {
+      setLoading(false)
+      reset()
+    }
   };
 
   return (
@@ -58,8 +111,8 @@ const Create = () => {
           />
           <RequiredMessage>{errors.files?.message}</RequiredMessage>
 
-          <PrimaryButton  type='submit'>
-            Crear Denuncia
+          <PrimaryButton disabled={loading}  type='submit'>
+            { loading ? 'Creando...' : 'Crear Denuncia' }
           </PrimaryButton>
       </form>
     </div>
