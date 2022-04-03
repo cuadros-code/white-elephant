@@ -50,12 +50,17 @@ const Create = () => {
         const imagesRef = ref(storage, `files/${file.name}`);
         reader.readAsDataURL(file);
         const url = await uploadFile(imagesRef, file )
-        return url
+        return {
+          name: file.name,
+          url,
+          size: file.size,
+          type: file.type
+        }
       })
   
       const listFiles = await Promise.all(directionFiles)
   
-      await addDoc(collection( db, 'records' ), {
+      await addDoc(collection( db, 'post' ), {
         uid: user?.id,
         title,
         description,
