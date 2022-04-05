@@ -23,6 +23,17 @@ const DragAndDrop = ( { setValueForm,setError }: IDragAndDrop ) => {
     e.stopPropagation();
   };
 
+  const handleDragEnter = ( e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDragLeave = ( e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+
   const handleDrop = ( e: DragEvent<any>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -72,6 +83,8 @@ const DragAndDrop = ( { setValueForm,setError }: IDragAndDrop ) => {
         className={styles.dragAndDrop}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
       >
         <div className={styles.contentActions}>
           <p>Arrastra tus archivos</p>
