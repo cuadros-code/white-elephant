@@ -24,7 +24,7 @@ const NavBar = () => {
       <>
         <li onClick={closeMenu}>
           <Link href={"/dashboard/profile"}>
-            <a>Perfil</a>
+            Perfil
           </Link>
         </li>
 
@@ -46,13 +46,13 @@ const NavBar = () => {
     return (
       <>
         <li onClick={closeMenu}>
-          <Link href={"/login"}>
-            <a>Iniciar sesión</a>
+          <Link href={"/login"} legacyBehavior>
+            Iniciar sesión
           </Link>
         </li>
         <li onClick={closeMenu}>
-          <Link href={"/register"}>
-            <a className={styles.last_item}>Registrarse</a>
+          <Link href={"/register"} className={styles.last_item}>
+            Registrarse
           </Link>
         </li>
       </>
@@ -95,13 +95,13 @@ const NavBar = () => {
         </nav>
           <ul className={`${styles.nav_list} ${menuMobile ? styles.active : ""}`}>
             <li onClick={closeMenu}>
-              <Link href={"/"}>
-                <a>Casos</a>
+              <Link href={"/"} >
+                Casos
               </Link>
             </li>
             <li onClick={closeMenu}>
               <Link href={"/dashboard"}>
-                <a>Colaborar</a>
+                Colaborar
               </Link>
             </li>
             {

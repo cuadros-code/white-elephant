@@ -48,44 +48,38 @@ const LayoutDashboard = ({ children }: Props) => {
       >
           
           <Link href='/dashboard'>
-            <a>
               <RiHome2Line 
                 color={colorIcon('/dashboard')}
               /> 
               <span>Panel</span>
-            </a>
           </Link>
-          <Link href='/dashboard/create'>
-            <a>
+          <Link href='/dashboard/create' >
+            
               <RiAddCircleLine 
                 color={colorIcon('/dashboard/create')}
               /> 
               <span>Agregar denuncia</span>
-            </a>
           </Link>
-          <Link href='/dashboard/profile'>
-            <a>
+          <Link href='/dashboard/profile' >
               <RiEdit2Line
                 color={colorIcon('/dashboard/profile')}
               /> 
               <span>Editar perfil</span>
-            </a>
           </Link>
-          <Link href='/dashboard/notes'>
-            <a>
+          <Link href='/dashboard/notes' >
+            
               <RiStickyNoteLine
                 color={colorIcon('/dashboard/notes')}
               /> 
               <span>Mis notas</span>
-            </a>
+            
           </Link>
-          <Link href='/dashboard/setting'>
-            <a>
+          <Link href='/dashboard/setting' >
+            
               <RiSettings2Line
                 color={colorIcon('/dashboard/setting')}
               />
               <span>Configuración</span>
-            </a>
           </Link>
         <button className={styles.actionMenu} onClick={() => setOpenMenu(!openMenu)} >
           { openMenu ? '>' : '<'} 

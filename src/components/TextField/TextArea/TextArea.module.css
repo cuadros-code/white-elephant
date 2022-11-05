@@ -12,14 +12,18 @@
   resize: none;
   font-size: 1.5rem;
   padding: 5px;
-  border: 2px solid #e1e1e1;
+  border: 1px solid #e1e1e1;
   border-radius: 10px;
 }
 
 .textArea:focus {
-  border: 2px solid #00bcd4;
+  border: 1px solid #00bcd4;
 }
 
 .textArea:focus-visible {
   outline: none;
+}
+
+.error{
+  border: 1px solid #f44336;
 }

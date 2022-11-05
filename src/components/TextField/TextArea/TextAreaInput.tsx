@@ -13,11 +13,12 @@ const TextArea = forwardRef<any, any>(( props: TextFieldProps, ref ) => {
 
   return (
     <div className={styles.contentTextArea}>
-      <label className={styles.label}> 
+      <label className={styles.label} htmlFor={label}> 
         { label } 
       </label>
       <textarea 
-        className={styles.textArea}
+        id={label}
+          className={`${styles.textArea} ${error && styles.error }`}
         disabled={disabled} 
         ref={ref} 
         {...rest} 

@@ -58,8 +58,8 @@ const Login = () => {
               >
                 {loadAuthenticate ? <Loading /> : 'Iniciar sesión'}
               </PrimaryButton>
-              <Link href='/register'>
-                <a className={styles.link} >Recuperar contraseña</a>
+              <Link href='/register' className={styles.link}>
+                Recuperar contraseña
               </Link>
             </form>
             <p className={styles.divider}><span>Iniciar sesión con</span></p>

@@ -14,6 +14,7 @@ import { useStoreAuth } from 'src/store/authStore';
 import { useMessageError } from 'src/store/messageStore';
 
 const AutoCompleteInput = dynamic(() => import("src/components/TextField/AutoComplete/AutoCompleteInput"), { ssr:false})
+
 interface IFormCreate {
   lat          : number
   lng          : number
@@ -35,11 +36,11 @@ const Create = () => {
   } = useForm<IFormCreate>({
     resolver: yupResolver(schemaCreate)
   });
+
   const [loading, setLoading] = useState(false)
   const { uploadFile } = useUploadFile()
   const { user } = useStoreAuth( auth => auth )
-  const message = useMessageError( state => state );
-
+  const feedbackMessage = useMessageError( state => state );
 
   const onSubmit = async (data: IFormCreate) => {
     setLoading(true)
@@ -67,14 +68,14 @@ const Create = () => {
         location,
         files: listFiles,
       })
-      message.setError({
+      feedbackMessage.setError({
         error: true,
         message: 'Registro creado con exito',
         type: 'success',
       })
       
     } catch (error) {
-      message.setError({
+      feedbackMessage.setError({
         error: true,
         message: 'No se pudo crear el registro',
         type: 'error',
@@ -88,9 +89,11 @@ const Create = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+          
           <TextField
             {...register('title')} 
             label='Titulo de la denuncia'
+            error={errors.title?.message}
             placeholder='Ingresa el titulo de la denuncia'
           />
           <RequiredMessage>{errors.title?.message}</RequiredMessage>
@@ -99,6 +102,7 @@ const Create = () => {
             hiddenCurrentLocation={true}
             setError={setError}
             setValueForm={setValue}
+            error={!!errors.location?.message}
           />
           <RequiredMessage>{errors.location?.message}</RequiredMessage>
 
@@ -106,6 +110,7 @@ const Create = () => {
             {...register('description')}
             label='Descripción de la denuncia'
             placeholder='Ingresa la descripción de la denuncia'
+            error={errors.description?.message}
             rows={5}
           />
           <RequiredMessage>{errors.description?.message}</RequiredMessage>
@@ -116,7 +121,7 @@ const Create = () => {
           />
           <RequiredMessage>{errors.files?.message}</RequiredMessage>
 
-          <PrimaryButton disabled={loading}  type='submit'>
+          <PrimaryButton disabled={loading} type='submit'>
             { loading ? 'Creando...' : 'Crear Denuncia' }
           </PrimaryButton>
       </form>

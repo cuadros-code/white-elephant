@@ -10,14 +10,16 @@ import { UseFormSetValue, UseFormSetError, ErrorOption } from 'react-hook-form';
 interface TextFieldProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>{
   setValueForm          : UseFormSetValue<any>
   hiddenCurrentLocation?: boolean
-  setError              : UseFormSetError<any>
+  setError              : UseFormSetError<any>,
+  error                 : boolean | undefined
 }
 
 const AutoCompleteInput = (props: TextFieldProps) => {
   const {
     setValueForm, 
     setError,
-    hiddenCurrentLocation = false
+    hiddenCurrentLocation = false,
+    error = false,
   } = props;
 
   const message = useMessageError( state => state );
@@ -72,6 +74,7 @@ const AutoCompleteInput = (props: TextFieldProps) => {
           <TextField
             loading={isPlacePredictionsLoading}
             label='Dirección'
+            error={error}
             placeholder='Ingresa tu dirección'
             onChange={(evt: any) => {
               getPlacePredictions({ input: evt.target.value });
